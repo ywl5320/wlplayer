@@ -10,7 +10,7 @@
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/6.png)</br>
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/7.png)</br>
 
-## API v1.0
+## 一、API v1.0
 #### 1、回调接口
     //准备好播放后回调此接口
     WlOnPreparedListener
@@ -77,7 +77,7 @@
     void setAudioChannels(int index)
     
 
-## 接入流程
+## 二、接入流程
 #### 1、添加布局
     <com.ywl5320.opengles.WlGlSurfaceView
         android:id="@+id/surfaceview"
@@ -184,6 +184,17 @@
         });
         
 
+## TODO
+### 兼容性和性能优化
+</br>
+</br>
+
+## 注
+#### 当前环境：FFmpeg-3.4, AS-3.0， NDK-14b，小米手机2A
+#### CPU：arm(only)
+#### 2018-01-01 happy new year！
 
 
-create by:ywl5320
+### Create by:ywl5320
+</br>
+</br>
