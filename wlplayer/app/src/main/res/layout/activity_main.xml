@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context="com.ywl5320.player.activity.VideoLiveActivity">
+
+    <com.ywl5320.opengles.WlGlSurfaceView
+        android:id="@+id/surfaceview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:indeterminateDrawable="@drawable/video_loading"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="14dp"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/ly_action"/>
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_above="@+id/ly_action"
+        android:layout_toRightOf="@+id/tv_time"
+        android:layout_marginBottom="3dp"
+        android:visibility="gone"
+        android:layout_marginRight="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/ly_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="#96000000"
+        android:padding="5dp"
+        android:visibility="invisible">
+        <ImageView
+            android:id="@+id/iv_pause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:onClick="pause"
+            android:src="@mipmap/ic_play_pause"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_cutimg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:onClick="cutImg"
+        android:visibility="gone"
+        android:src="@mipmap/icon_cut_img"/>
+    <ImageView
+        android:id="@+id/iv_show_img"
+        android:layout_width="200dp"
+        android:layout_height="115dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_ec4c48"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:padding="1dp"/>
+
+</RelativeLayout>

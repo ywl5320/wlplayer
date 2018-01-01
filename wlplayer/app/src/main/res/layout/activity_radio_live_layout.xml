@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/icon_live_bg"
+        android:scaleType="centerCrop"/>
+    <include
+        android:id="@+id/title"
+        layout="@layout/include_common_text_title"/>
+
+    <com.ywl5320.player.widget.SquareImageView
+        android:id="@+id/siv_logo"
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_live_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/siv_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/color_white"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="@color/color_white"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/rl_action"
+        android:layout_marginBottom="10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_action"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_play_pause"/>
+        <ProgressBar
+            android:id="@+id/pb_load"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:indeterminateDrawable="@drawable/play_load_drawable"
+            android:indeterminateOnly="true"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            android:indeterminateBehavior="repeat"/>
+        <ImageView
+            android:id="@+id/iv_pre"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_play"
+            android:layout_marginRight="30dp"
+            android:src="@mipmap/ic_play_pre"/>
+        <ImageView
+            android:id="@+id/iv_next"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_play"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/ic_play_next"/>
+    </RelativeLayout>
+
+</RelativeLayout>
