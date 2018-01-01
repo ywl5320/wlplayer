@@ -3,24 +3,21 @@ cmake_minimum_required(VERSION 3.4.1)
 
 include_directories(src/main/cpp/include)
 
-add_library( # Sets the name of the library.
+add_library(
              wlplayer
 
-             # Sets the library as a shared library.
              SHARED
 
-             # Provides a relative path to your source file(s).
              src/main/cpp/wlplayer.cpp
-             src/main/cpp/WlListener.cpp
-             src/main/cpp/WlFFmpeg.cpp
              src/main/cpp/WlBasePlayer.cpp
+             src/main/cpp/WlFFmpeg.cpp
+             src/main/cpp/WlJavaCall.cpp
              src/main/cpp/WlAudio.cpp
              src/main/cpp/WlVideo.cpp
              src/main/cpp/WlQueue.cpp
-             src/main/cpp/WlOpenGLES.cpp
-             src/main/cpp/WlOpenSLES.cpp
-             src/main/cpp/WlPlayStatus.cpp)
-
+             src/main/cpp/WlPlayStatus.cpp
+             src/main/cpp/WlAudioChannel.cpp
+             )
 
 #添加libavcodec-57.so
 add_library( avcodec-57
@@ -94,7 +91,6 @@ target_link_libraries( # Specifies the target library.
                        swscale-4
                        postproc-54
                        OpenSLES
-                       GLESv2
                        android
                        log
                         )

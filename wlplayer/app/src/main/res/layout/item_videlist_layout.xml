@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/btn_selector_gray"
+        android:textSize="14dp"
+        android:textColor="@color/color_333333"
+        android:text="新闻"
+        android:gravity="center"
+        android:layout_marginBottom="0.5dp"/>
+</LinearLayout>

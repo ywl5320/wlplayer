@@ -1,8 +1,7 @@
 //
-// Created by ywl on 2017-12-7.
+// Created by hlwky001 on 2017/12/18.
 //
 
-#pragma once
 #ifndef WLPLAYER_WLPLAYSTATUS_H
 #define WLPLAYER_WLPLAYSTATUS_H
 
@@ -10,12 +9,10 @@
 class WlPlayStatus {
 
 public:
-    /**
-     * 0：播放
-     * 1：暂停
-     * 2：停止
-     */
-    int play_status;
+    bool exit;
+    bool pause;
+    bool load;
+    bool seek;
 
 public:
     WlPlayStatus();

@@ -5,7 +5,7 @@
 #ifndef WLPLAYER_QUEUE_H
 #define WLPLAYER_QUEUE_H
 
-#include "deque"
+#include "queue"
 #include "WlPlayStatus.h"
 
 extern "C"
@@ -17,19 +17,30 @@ extern "C"
 class WlQueue {
 
 public:
-    std::deque<AVPacket*> queuePacket;
+    std::queue<AVPacket*> queuePacket;
+    std::queue<AVFrame*> queueFrame;
+    pthread_mutex_t mutexFrame;
+    pthread_cond_t condFrame;
     pthread_mutex_t mutexPacket;
     pthread_cond_t condPacket;
-
+    WlPlayStatus *wlPlayStatus = NULL;
 
 public:
-    WlQueue();
+    WlQueue(WlPlayStatus *playStatus);
     ~WlQueue();
     int putAvpacket(AVPacket *avPacket);
     int getAvpacket(AVPacket *avPacket);
     int clearAvpacket();
 
+    int putAvframe(AVFrame *avFrame);
+    int getAvframe(AVFrame *avFrame);
+    int clearAvFrame();
+
     void release();
+    int getAvPacketSize();
+    int getAvFrameSize();
+
+    int noticeThread();
 };
 
 

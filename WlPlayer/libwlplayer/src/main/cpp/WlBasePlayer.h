@@ -14,7 +14,10 @@ class WlBasePlayer {
 
 public:
     int streamIndex;
-    AVCodecContext *avCodecContext;
+    int duration;
+    double clock = 0;
+    double now_time = 0;
+    AVCodecContext *avCodecContext = NULL;
     AVRational time_base;
 
 public:

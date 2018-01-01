@@ -1,51 +1,52 @@
 //
-// Created by ywl on 2017-12-3.
+// Created by ywl on 2017-12-17.
 //
 
 #ifndef WLPLAYER_WLVIDEO_H
 #define WLPLAYER_WLVIDEO_H
 
-#include "AndroidLog.h"
+
 #include "WlBasePlayer.h"
 #include "WlQueue.h"
-#include "WlPlayStatus.h"
-#include <android/native_window_jni.h>
+#include "WlJavaCall.h"
+#include "AndroidLog.h"
+#include "WlAudio.h"
+
 extern "C"
 {
-#include "libswscale/swscale.h"
-#include "libavutil/imgutils.h"
-#include <libavutil/time.h>
+    #include <libavutil/time.h>
 };
 
 class WlVideo : public WlBasePlayer{
 
 public:
-    pthread_t frameCodecThread;
-    WlQueue *queue;
-    WlPlayStatus *wlPlayStatus;
-    std::deque<AVFrame*> queueFrame;
-    pthread_mutex_t mutexFrame;
-    pthread_cond_t condFrame;
-    int ret;
-    double framePts;
-    double video_clock;
-    double delayTime;
-    int rate;
+    WlQueue *queue = NULL;
+    WlAudio *wlAudio = NULL;
+    WlPlayStatus *wlPlayStatus = NULL;
+    pthread_t videoThread;
+    pthread_t decFrame;
+    WlJavaCall *wljavaCall = NULL;
+
+    double delayTime = 0;
+    int rate = 0;
+    bool isExit = true;
+    bool isExit2 = true;
+    int codecType = -1;
+    double video_clock = 0;
+    double framePts = 0;
 
 public:
-    WlVideo(WlPlayStatus *playStatus);
+    WlVideo(WlJavaCall *javaCall, WlAudio *audio, WlPlayStatus *playStatus);
     ~WlVideo();
 
-    int putAvframe(AVFrame *avFrame);
-    int getAvframe(AVFrame *avFrame);
-
-    int playVideo();
-    int decodeFrame();
-
+    void playVideo(int codecType);
+    void decodVideo();
+    void release();
     double synchronize(AVFrame *srcFrame, double pts);
 
-    int clearAvFrame();
-    void release();
+    double getDelayTime(double diff);
+
+    void setClock(int secds);
 
 };
 
