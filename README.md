@@ -184,6 +184,10 @@
         });
         
 
+## 如果帮到了您，您可以选择打赏一下哦~
+<img width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_ali.png"/>
+
+
 ## TODO
 ### 兼容性和性能优化
 </br>
