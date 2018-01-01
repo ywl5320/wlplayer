@@ -187,14 +187,13 @@
 ## TODO
 ### 兼容性和性能优化
 </br>
-</br>
 
 ## 注
 #### 当前环境：FFmpeg-3.4, AS-3.0， NDK-14b，小米手机2A
 #### CPU：arm(only)
 #### 2018-01-01 happy new year！
-
-
-### Create by:ywl5320
 </br>
+
+## Create by:ywl5320
 </br>
+
