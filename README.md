@@ -1,5 +1,12 @@
 # wlplayer v1.0
-### Android 基于：FFmpeg+OpenSL+OpenGL+Mediacodec 的视频播放SDK，可播放网络、本地和广播等流媒。支持当前播放页直接切换播放源；支持视频实时截图；优先选用GPU解码，解码速度更快；在手机支持1080P、2K、4K等的情况下都可播放；封装常用播放状态回调，接入简单。
+### Android 基于：FFmpeg+OpenSL+OpenGL+Mediacodec 的视频播放SDK，可播放网络、本地和广播等流媒。
+### 1、支持当前播放页直接切换播放源。
+### 2、支持视频实时截图。
+### 3、优先选用GPU解码，解码速度更快。
+### 4、在手机支持1080P、2K、4K等的情况下都可播放。
+### 5、封装常用播放状态回调，接入简单。
+### 6、直接用mediacodec解码avpacket数据。
+### 7、重点是可以学到很多东西：java与C++的相互调用、多线程的使用、opengl、opensl的使用等等。
 ## APP Demo（注：视频数据来自于熊猫TV，广播数据来自于中国广播网）
 ### [App Demo 下载地址](https://pan.baidu.com/s/1cfjQAM)
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/1.png)
