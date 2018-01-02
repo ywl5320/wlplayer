@@ -7,6 +7,7 @@
 ### 5、封装常用播放状态回调，接入简单。
 ### 6、直接用mediacodec解码avpacket数据。
 ### 7、重点是可以学到很多东西：java与C++的相互调用、多线程的使用、opengl、opensl的使用等等。
+### 8、附带一个播放视频和广播的demo。
 ## APP Demo（注：视频数据来自于熊猫TV，广播数据来自于中国广播网）
 ### [App Demo 下载地址](https://pan.baidu.com/s/1cfjQAM)
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/1.png)
