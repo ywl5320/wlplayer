@@ -115,6 +115,7 @@ int WlAudio::getPcmData(void **pcm) {
         {
             wljavaCall->onLoad(WL_THREAD_CHILD, true);
             wlPlayStatus->load = true;
+            isReadPacketFinish = true;
             continue;
         }
         if(!isVideo)
@@ -135,84 +136,89 @@ int WlAudio::getPcmData(void **pcm) {
                 }
             }
         }
-
-        AVPacket *packet = av_packet_alloc();
-        if(queue->getAvpacket(packet) != 0)
+        if(isReadPacketFinish)
         {
-            av_packet_free(&packet);
-            av_free(packet);
-            packet = NULL;
-            continue;
+            isReadPacketFinish = false;
+            packet = av_packet_alloc();
+            if(queue->getAvpacket(packet) != 0)
+            {
+                av_packet_free(&packet);
+                av_free(packet);
+                packet = NULL;
+                isReadPacketFinish = true;
+                continue;
+            }
+            ret = avcodec_send_packet(avCodecContext, packet);
+            if (ret < 0 && ret != AVERROR(EAGAIN) && ret != AVERROR_EOF) {
+                av_packet_free(&packet);
+                av_free(packet);
+                packet = NULL;
+                isReadPacketFinish = true;
+                continue;
+            }
         }
-        ret = avcodec_send_packet(avCodecContext, packet);
-        if (ret < 0 && ret != AVERROR(EAGAIN) && ret != AVERROR_EOF) {
-            av_packet_free(&packet);
-            av_free(packet);
-            packet = NULL;
-            continue;
-        }
-        AVFrame *frame = av_frame_alloc();
-        ret = avcodec_receive_frame(avCodecContext, frame);
-        if (ret < 0 && ret != AVERROR_EOF) {
-            av_frame_free(&frame);
-            av_free(frame);
-            frame = NULL;
-            av_packet_free(&packet);
-            av_free(packet);
-            packet = NULL;
-            continue;
-        }
-        // 设置通道数或channel_layout
-        if (frame->channels > 0 && frame->channel_layout == 0)
-            frame->channel_layout = av_get_default_channel_layout(frame->channels);
-        else if (frame->channels == 0 && frame->channel_layout > 0)
-            frame->channels = av_get_channel_layout_nb_channels(frame->channel_layout);
 
-        SwrContext *swr_ctx;
-        //重采样为立体声
-        dst_layout = AV_CH_LAYOUT_STEREO;
-        // 设置转换参数
-        swr_ctx = swr_alloc_set_opts(NULL, dst_layout, dst_format, frame->sample_rate,
-                                     frame->channel_layout,
-                                     (enum AVSampleFormat) frame->format,
-                                     frame->sample_rate, 0, NULL);
-        if (!swr_ctx || (ret = swr_init(swr_ctx)) < 0) {
-            LOGD("wrong3 ret %d", ret);
+        AVFrame *frame = av_frame_alloc();
+        if(avcodec_receive_frame(avCodecContext, frame) == 0)
+        {
+            // 设置通道数或channel_layout
+            if (frame->channels > 0 && frame->channel_layout == 0)
+                frame->channel_layout = av_get_default_channel_layout(frame->channels);
+            else if (frame->channels == 0 && frame->channel_layout > 0)
+                frame->channels = av_get_channel_layout_nb_channels(frame->channel_layout);
+
+            SwrContext *swr_ctx;
+            //重采样为立体声
+            dst_layout = AV_CH_LAYOUT_STEREO;
+            // 设置转换参数
+            swr_ctx = swr_alloc_set_opts(NULL, dst_layout, dst_format, frame->sample_rate,
+                                         frame->channel_layout,
+                                         (enum AVSampleFormat) frame->format,
+                                         frame->sample_rate, 0, NULL);
+            if (!swr_ctx || (ret = swr_init(swr_ctx)) < 0) {
+                av_frame_free(&frame);
+                av_free(frame);
+                frame = NULL;
+                swr_free(&swr_ctx);
+                av_packet_free(&packet);
+                av_free(packet);
+                packet = NULL;
+                continue;
+            }
+            // 计算转换后的sample个数 a * b / c
+            dst_nb_samples = av_rescale_rnd(
+                    swr_get_delay(swr_ctx, frame->sample_rate) + frame->nb_samples,
+                    frame->sample_rate, frame->sample_rate, AV_ROUND_INF);
+            // 转换，返回值为转换后的sample个数
+            nb = swr_convert(swr_ctx, &out_buffer, dst_nb_samples,
+                             (const uint8_t **) frame->data, frame->nb_samples);
+
+            //根据布局获取声道数
+            out_channels = av_get_channel_layout_nb_channels(dst_layout);
+            data_size = out_channels * nb * av_get_bytes_per_sample(dst_format);
+            now_time = frame->pts * av_q2d(time_base);
+            if(now_time < clock)
+            {
+                now_time = clock;
+            }
+            clock = now_time;
             av_frame_free(&frame);
             av_free(frame);
             frame = NULL;
             swr_free(&swr_ctx);
+            *pcm = out_buffer;
+            break;
+        } else
+        {
+            isReadPacketFinish = true;
+            av_frame_free(&frame);
+            av_free(frame);
+            frame = NULL;
             av_packet_free(&packet);
             av_free(packet);
             packet = NULL;
             continue;
         }
-        // 计算转换后的sample个数 a * b / c
-        dst_nb_samples = av_rescale_rnd(
-                swr_get_delay(swr_ctx, frame->sample_rate) + frame->nb_samples,
-                frame->sample_rate, frame->sample_rate, AV_ROUND_INF);
-        // 转换，返回值为转换后的sample个数
-        nb = swr_convert(swr_ctx, &out_buffer, dst_nb_samples,
-                         (const uint8_t **) frame->data, frame->nb_samples);
-
-        //根据布局获取声道数
-        out_channels = av_get_channel_layout_nb_channels(dst_layout);
-        data_size = out_channels * nb * av_get_bytes_per_sample(dst_format);
-        av_frame_free(&frame);
-        av_free(frame);
-        frame = NULL;
-        swr_free(&swr_ctx);
-        now_time = packet->pts * av_q2d(time_base);
-        if(now_time < clock)
-        {
-            now_time = clock;
-        }
-        clock = now_time;
-        av_packet_free(&packet);
-        av_free(packet);
-        packet = NULL;
-        *pcm = out_buffer;
-        break;
     }
     isExit = true;
     return data_size;

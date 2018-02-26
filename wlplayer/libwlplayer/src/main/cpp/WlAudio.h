@@ -44,6 +44,9 @@ public:
     bool isExit = false;
     bool isVideo = false;
 
+    bool isReadPacketFinish = true;
+    AVPacket *packet;
+
     // 引擎接口
     SLObjectItf engineObject = NULL;
     SLEngineItf engineEngine = NULL;

@@ -48,7 +48,7 @@ public:
     int preparedFFmpeg();
     int decodeFFmpeg();
     int start();
-    int seek(int sec);
+    int seek(int64_t sec);
     int getDuration();
     int getAvCodecContext(AVCodecParameters * parameters, WlBasePlayer *wlBasePlayer);
     void release();

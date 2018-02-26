@@ -420,7 +420,7 @@ int WlFFmpeg::getMimeType(const char *codecName) {
     return -1;
 }
 
-int WlFFmpeg::seek(int sec) {
+int WlFFmpeg::seek(int64_t sec) {
     if(sec >= duration)
     {
         return -1;
@@ -437,16 +437,18 @@ int WlFFmpeg::seek(int sec) {
         if(wlAudio != NULL)
         {
             wlAudio->queue->clearAvpacket();
-            av_seek_frame(pFormatCtx, wlAudio->streamIndex, sec * wlAudio->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
+//            av_seek_frame(pFormatCtx, wlAudio->streamIndex, sec * wlAudio->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
             wlAudio->setClock(sec);
         }
         if(wlVideo != NULL)
         {
             wlVideo->queue->clearAvFrame();
             wlVideo->queue->clearAvpacket();
-            av_seek_frame(pFormatCtx, wlVideo->streamIndex, sec * wlVideo->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
+//            av_seek_frame(pFormatCtx, wlVideo->streamIndex, sec * wlVideo->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
             wlVideo->setClock(sec);
         }
+        int64_t rel = sec * AV_TIME_BASE;
+        int ret = avformat_seek_file(pFormatCtx, -1, INT64_MIN, rel, INT64_MAX, 0);
         wlPlayStatus->seek = false;
         wlPlayStatus->load = false;
     }
