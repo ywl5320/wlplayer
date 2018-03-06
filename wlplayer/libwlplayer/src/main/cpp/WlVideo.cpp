@@ -204,6 +204,10 @@ void WlVideo::decodVideo() {
                 LOGE("video clock is %f", time);
                 LOGE("audio clock is %f", wlAudio->clock);
             }
+            if(time < 0)
+            {
+                time = packet->dts * av_q2d(time_base);
+            }
 
             if(time < clock)
             {
@@ -258,7 +262,7 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(delayTime >= 1)
+            if(diff >= 1)
             {
                 av_frame_free(&frame);
                 av_free(frame);

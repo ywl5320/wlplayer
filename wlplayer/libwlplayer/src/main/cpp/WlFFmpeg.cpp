@@ -255,7 +255,6 @@ int WlFFmpeg::start() {
     {
         wlAudio->playAudio();
     }
-
     if(wlVideo != NULL)
     {
         if(mimeType == -1)
