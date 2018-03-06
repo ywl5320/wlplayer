@@ -1,4 +1,8 @@
-# wlplayer v1.0
+# wlplayer v1.0.1
+## Update
+### *.添加 x86 cpu架构
+### *.修复seek后导致音视频不同步问题
+### *.视频解码慢时，进行丢帧处理
 
 ## [我的视频课程：《FFmpeg打造Android万能音频播放器》](https://edu.csdn.net/course/detail/6842)
 
@@ -23,9 +27,6 @@
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/7.png)</br>
 
 ## 一、API v1.0.1
-### *.添加 x86 cpu架构
-### *.修复seek后导致音视频不同步问题
-### *.视频解码慢时，进行丢帧处理
 
 #### 1、回调接口
     //准备好播放后回调此接口
