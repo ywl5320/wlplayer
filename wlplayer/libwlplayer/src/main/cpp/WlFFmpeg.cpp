@@ -293,12 +293,12 @@ int WlFFmpeg::start() {
         {
             continue;
         }
-        if(wlAudio != NULL && wlAudio->queue->getAvPacketSize() > 40)
+        if(wlAudio != NULL && wlAudio->queue->getAvPacketSize() > 100)
         {
 //            LOGE("wlAudio 等待..........");
             continue;
         }
-        if(wlVideo != NULL && wlVideo->queue->getAvPacketSize() > 40)
+        if(wlVideo != NULL && wlVideo->queue->getAvPacketSize() > 100)
         {
 //            LOGE("wlVideo 等待..........");
             continue;
