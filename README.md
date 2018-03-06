@@ -206,7 +206,7 @@
 
 ## 注
 #### 当前环境：FFmpeg-3.4, AS-3.0， NDK-14b，小米手机2A
-#### CPU：arm(only)
+#### CPU：arm 和 x86
 #### 2018-01-01 happy new year！
 </br>
 
