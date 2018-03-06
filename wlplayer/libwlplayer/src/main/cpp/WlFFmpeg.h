@@ -41,6 +41,7 @@ public:
     std::deque<WlAudioChannel*> videochannels;
 
     pthread_mutex_t init_mutex;
+    pthread_mutex_t seek_mutex;
 
 public:
     WlFFmpeg(WlJavaCall *javaCall, const char *urlpath, bool onlymusic);

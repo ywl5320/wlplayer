@@ -273,6 +273,8 @@ double WlVideo::synchronize(AVFrame *srcFrame, double pts) {
 }
 
 double WlVideo::getDelayTime(double diff) {
+
+    LOGD("audio video diff is %f", diff);
     if(diff > 0.003)
     {
         delayTime = delayTime / 3 * 2;

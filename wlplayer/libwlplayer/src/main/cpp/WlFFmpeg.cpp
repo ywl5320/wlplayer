@@ -19,6 +19,7 @@ int WlFFmpeg::preparedFFmpeg() {
 
 WlFFmpeg::WlFFmpeg(WlJavaCall *javaCall, const char *url, bool onlymusic) {
     pthread_mutex_init(&init_mutex, NULL);
+    pthread_mutex_init(&seek_mutex, NULL);
     exitByUser = false;
     isOnlyMusic = onlymusic;
     wlJavaCall = javaCall;
@@ -259,22 +260,26 @@ int WlFFmpeg::start() {
         {
             continue;
         }
-        if(wlPlayStatus->seek)
+        if(wlAudio != NULL && wlAudio->queue->getAvPacketSize() > 240)
         {
+//            LOGE("wlAudio 等待..........");
             continue;
         }
-        if(wlAudio != NULL && wlAudio->queue->getAvPacketSize() > 40)
+        if(wlVideo != NULL && wlVideo->queue->getAvPacketSize() > 240)
         {
-            LOGE("wlAudio 等待..........");
-            continue;
-        }
-        if(wlVideo != NULL && wlVideo->queue->getAvPacketSize() > 40)
-        {
-            LOGE("wlVideo 等待..........");
+//            LOGE("wlVideo 等待..........");
             continue;
         }
         AVPacket *packet = av_packet_alloc();
+        pthread_mutex_lock(&seek_mutex);
         ret = av_read_frame(pFormatCtx, packet);
+        pthread_mutex_unlock(&seek_mutex);
+        if(wlPlayStatus->seek)
+        {
+            av_packet_free(&packet);
+            av_free(packet);
+            continue;
+        }
         if(ret == 0)
         {
             if(wlAudio != NULL && packet->stream_index ==  wlAudio->streamIndex)
@@ -432,25 +437,24 @@ int WlFFmpeg::seek(int64_t sec) {
     if(pFormatCtx != NULL)
     {
         wlPlayStatus->seek = true;
-        wlPlayStatus->load = true;
-        av_usleep(1000 * 10);//此处可用线程锁
+        pthread_mutex_lock(&seek_mutex);
+        int64_t rel = sec * AV_TIME_BASE;
+        int ret = avformat_seek_file(pFormatCtx, -1, INT64_MIN, rel, INT64_MAX, 0);
         if(wlAudio != NULL)
         {
             wlAudio->queue->clearAvpacket();
-//            av_seek_frame(pFormatCtx, wlAudio->streamIndex, sec * wlAudio->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
-            wlAudio->setClock(sec);
+//            av_seek_frame(pFormatCtx, wlAudio->streamIndex, sec * wlAudio->time_base.den, AVSEEK_FLAG_FRAME | AVSEEK_FLAG_BACKWARD);
+            wlAudio->setClock(0);
         }
         if(wlVideo != NULL)
         {
             wlVideo->queue->clearAvFrame();
             wlVideo->queue->clearAvpacket();
-//            av_seek_frame(pFormatCtx, wlVideo->streamIndex, sec * wlVideo->time_base.den, AVSEEK_FLAG_ANY | AVSEEK_FLAG_BACKWARD);
-            wlVideo->setClock(sec);
+//            av_seek_frame(pFormatCtx, wlVideo->streamIndex, sec * wlVideo->time_base.den, AVSEEK_FLAG_FRAME | AVSEEK_FLAG_BACKWARD);
+            wlVideo->setClock(0);
         }
-        int64_t rel = sec * AV_TIME_BASE;
-        int ret = avformat_seek_file(pFormatCtx, -1, INT64_MIN, rel, INT64_MAX, 0);
+        pthread_mutex_unlock(&seek_mutex);
         wlPlayStatus->seek = false;
-        wlPlayStatus->load = false;
     }
     return 0;
 }
