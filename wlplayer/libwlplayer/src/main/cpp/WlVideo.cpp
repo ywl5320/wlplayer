@@ -215,7 +215,7 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(diff > 0.5)
+            if(diff >= 1)
             {
                 av_free(packet->data);
                 av_free(packet->buf);
@@ -258,7 +258,7 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(delayTime > 0.5)
+            if(delayTime >= 1)
             {
                 av_frame_free(&frame);
                 av_free(frame);
