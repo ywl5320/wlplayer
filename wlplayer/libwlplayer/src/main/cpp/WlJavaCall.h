@@ -23,6 +23,7 @@ public:
     jmethodID jmid_gl_yuv;
     jmethodID jmid_info;
     jmethodID jmid_complete;
+    jmethodID jmid_onlysoft;
     jobject jobj;
 
 public:
@@ -43,6 +44,8 @@ public:
     void onComplete(int type);
 
     void release();
+
+    bool isOnlySoft(int type);
 
 };
 

@@ -111,6 +111,8 @@ public class WlPlayer {
      */
     private boolean isOnlyMusic = false;
 
+    private boolean isOnlySoft = false;
+
     public WlPlayer()
     {
         wlTimeBean = new WlTimeBean();
@@ -353,6 +355,16 @@ public class WlPlayer {
                 lastCurrTime = secds;
             }
         }).start();
+    }
+
+    public void setOnlySoft(boolean soft)
+    {
+        this.isOnlySoft = soft;
+    }
+
+    public boolean isOnlySoft()
+    {
+        return isOnlySoft;
     }
 
 

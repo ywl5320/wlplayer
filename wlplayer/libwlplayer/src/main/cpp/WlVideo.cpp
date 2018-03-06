@@ -219,12 +219,13 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(diff >= 1)
+            if(diff >= 0.8)
             {
                 av_free(packet->data);
                 av_free(packet->buf);
                 av_free(packet->side_data);
                 packet = NULL;
+                queue->clearAvpacket();
                 continue;
             }
             delayTime = getDelayTime(diff);
@@ -262,14 +263,19 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(diff >= 1)
+            delayTime = getDelayTime(diff);
+            if(LOG_SHOW)
+            {
+                LOGE("delay time %f diff is %f", delayTime, diff);
+            }
+            if(diff >= 0.8)
             {
                 av_frame_free(&frame);
                 av_free(frame);
                 frame = NULL;
+                queue->clearAvpacket();
                 continue;
             }
-            delayTime = getDelayTime(diff);
             av_usleep(delayTime * 1000);
             wljavaCall->onVideoInfo(WL_THREAD_CHILD, clock, duration);
             wljavaCall->onGlRenderYuv(WL_THREAD_CHILD, frame->linesize[0], frame->height, frame->data[0], frame->data[1], frame->data[2]);

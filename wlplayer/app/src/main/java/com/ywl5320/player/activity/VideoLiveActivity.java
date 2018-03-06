@@ -83,9 +83,8 @@ public class VideoLiveActivity extends BaseActivity {
                 wlPlayer.seek(position);
             }
         });
-
-
         wlPlayer.setDataSource(pathurl);
+        wlPlayer.setOnlySoft(false);
         wlPlayer.setWlGlSurfaceView(surfaceview);
         wlPlayer.setWlOnErrorListener(new WlOnErrorListener() {
             @Override

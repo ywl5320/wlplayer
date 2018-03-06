@@ -25,6 +25,7 @@ WlJavaCall::WlJavaCall(_JavaVM *vm, JNIEnv *env, jobject *obj) {
     jmid_gl_yuv = jniEnv->GetMethodID(jlz, "setFrameData", "(II[B[B[B)V");
     jmid_info = jniEnv->GetMethodID(jlz, "setVideoInfo", "(II)V");
     jmid_complete = jniEnv->GetMethodID(jlz, "videoComplete", "()V");
+    jmid_onlysoft = jniEnv->GetMethodID(jlz, "isOnlySoft", "()Z");
 }
 
 WlJavaCall::~WlJavaCall() {
@@ -239,6 +240,24 @@ void WlJavaCall::onComplete(int type) {
     {
         jniEnv->CallVoidMethod(jobj, jmid_complete);
     }
+}
+
+bool WlJavaCall::isOnlySoft(int type) {
+    bool soft = false;
+    if(type == WL_THREAD_CHILD)
+    {
+        JNIEnv *jniEnv;
+        if(javaVM->AttachCurrentThread(&jniEnv, 0) != JNI_OK)
+        {
+        }
+        soft = jniEnv->CallBooleanMethod(jobj, jmid_onlysoft);
+        javaVM->DetachCurrentThread();
+    }
+    else
+    {
+        soft = jniEnv->CallBooleanMethod(jobj, jmid_onlysoft);
+    }
+    return soft;
 }
 
 

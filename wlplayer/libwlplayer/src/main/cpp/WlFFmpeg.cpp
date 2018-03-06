@@ -181,7 +181,13 @@ int WlFFmpeg::decodeFFmpeg() {
             LOGE("codec name is %s", wlVideo->avCodecContext->codec->name);
             LOGE("codec long name is %s", wlVideo->avCodecContext->codec->long_name);
         }
-        mimeType = getMimeType(wlVideo->avCodecContext->codec->name);
+        if(!wlJavaCall->isOnlySoft(WL_THREAD_CHILD))
+        {
+            mimeType = getMimeType(wlVideo->avCodecContext->codec->name);
+        } else{
+            mimeType = -1;
+        }
+
         if(mimeType != -1)
         {
             wlJavaCall->onInitMediacodec(WL_THREAD_CHILD, mimeType, wlVideo->avCodecContext->width, wlVideo->avCodecContext->height, wlVideo->avCodecContext->extradata_size, wlVideo->avCodecContext->extradata_size, wlVideo->avCodecContext->extradata, wlVideo->avCodecContext->extradata);
