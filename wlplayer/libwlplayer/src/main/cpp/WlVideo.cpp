@@ -206,6 +206,14 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
+            if(diff > 0.5)
+            {
+                av_free(packet->data);
+                av_free(packet->buf);
+                av_free(packet->side_data);
+                packet = NULL;
+                continue;
+            }
             delayTime = getDelayTime(diff);
             LOGE("delay time %f diff is %f", delayTime, diff);
             av_usleep(delayTime * 1000);
@@ -236,6 +244,13 @@ void WlVideo::decodVideo() {
             if(wlAudio != NULL)
             {
                 diff = wlAudio->clock - clock;
+            }
+            if(delayTime > 0.5)
+            {
+                av_frame_free(&frame);
+                av_free(frame);
+                frame = NULL;
+                continue;
             }
             delayTime = getDelayTime(diff);
             av_usleep(delayTime * 1000);
