@@ -32,10 +32,16 @@ int avformat_interrupt_cb(void *ctx)
     WlFFmpeg *wlFFmpeg = (WlFFmpeg *) ctx;
     if(wlFFmpeg->wlPlayStatus->exit)
     {
-        LOGE("avformat_interrupt_cb return 1")
+        if(LOG_SHOW)
+        {
+            LOGE("avformat_interrupt_cb return 1")
+        }
         return AVERROR_EOF;
     }
-    LOGE("avformat_interrupt_cb return 0")
+    if(LOG_SHOW)
+    {
+        LOGE("avformat_interrupt_cb return 0")
+    }
     return 0;
 }
 
@@ -48,7 +54,10 @@ int WlFFmpeg::decodeFFmpeg() {
     pFormatCtx = avformat_alloc_context();
     if (avformat_open_input(&pFormatCtx, urlpath, NULL, NULL) != 0)
     {
-        LOGE("can not open url:%s", urlpath);
+        if(LOG_SHOW)
+        {
+            LOGE("can not open url:%s", urlpath);
+        }
         if(wlJavaCall != NULL)
         {
             wlJavaCall->onError(WL_THREAD_CHILD, WL_FFMPEG_CAN_NOT_OPEN_URL, "can not open url");
@@ -62,7 +71,10 @@ int WlFFmpeg::decodeFFmpeg() {
 
     if (avformat_find_stream_info(pFormatCtx, NULL) < 0)
     {
-        LOGE("can not find streams from %s", urlpath);
+        if(LOG_SHOW)
+        {
+            LOGE("can not find streams from %s", urlpath);
+        }
         if(wlJavaCall != NULL) {
             wlJavaCall->onError(WL_THREAD_CHILD, WL_FFMPEG_CAN_NOT_FIND_STREAMS,
                                 "can not find streams from url");
@@ -80,12 +92,18 @@ int WlFFmpeg::decodeFFmpeg() {
     }
 
     duration = pFormatCtx->duration / 1000000;
-    LOGD("channel numbers is %d", pFormatCtx->nb_streams);
+    if(LOG_SHOW)
+    {
+        LOGD("channel numbers is %d", pFormatCtx->nb_streams);
+    }
     for(int i = 0; i < pFormatCtx->nb_streams; i++)
     {
         if(pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO )//音频
         {
-            LOGE("音频");
+            if(LOG_SHOW)
+            {
+                LOGE("音频");
+            }
             WlAudioChannel *wl = new WlAudioChannel(i, pFormatCtx->streams[i]->time_base);
             audiochannels.push_front(wl);
         }
@@ -93,7 +111,10 @@ int WlFFmpeg::decodeFFmpeg() {
         {
             if(!isOnlyMusic)
             {
-                LOGE("视频");
+                if(LOG_SHOW)
+                {
+                    LOGE("视频");
+                }
                 int num = pFormatCtx->streams[i]->avg_frame_rate.num;
                 int den = pFormatCtx->streams[i]->avg_frame_rate.den;
                 if(num != 0 && den != 0)
@@ -155,8 +176,11 @@ int WlFFmpeg::decodeFFmpeg() {
     }
     if(wlVideo != NULL)
     {
-        LOGE("codec name is %s", wlVideo->avCodecContext->codec->name);
-        LOGE("codec long name is %s", wlVideo->avCodecContext->codec->long_name);
+        if(LOG_SHOW)
+        {
+            LOGE("codec name is %s", wlVideo->avCodecContext->codec->name);
+            LOGE("codec long name is %s", wlVideo->avCodecContext->codec->long_name);
+        }
         mimeType = getMimeType(wlVideo->avCodecContext->codec->name);
         if(mimeType != -1)
         {
@@ -164,9 +188,15 @@ int WlFFmpeg::decodeFFmpeg() {
         }
         wlVideo->duration = pFormatCtx->duration / 1000000;
     }
-    LOGE("准备ing");
+    if(LOG_SHOW)
+    {
+        LOGE("准备ing");
+    }
     wlJavaCall->onParpared(WL_THREAD_CHILD);
-    LOGE("准备end");
+    if(LOG_SHOW)
+    {
+        LOGE("准备end");
+    }
     exit = true;
     pthread_mutex_unlock(&init_mutex);
     return 0;
@@ -206,7 +236,10 @@ int WlFFmpeg::getAvCodecContext(AVCodecParameters *parameters, WlBasePlayer *wlB
 
 WlFFmpeg::~WlFFmpeg() {
     pthread_mutex_destroy(&init_mutex);
-    LOGE("~WlFFmpeg() 释放了");
+    if(LOG_SHOW)
+    {
+        LOGE("~WlFFmpeg() 释放了");
+    }
 }
 
 
@@ -285,7 +318,10 @@ int WlFFmpeg::start() {
             if(wlAudio != NULL && packet->stream_index ==  wlAudio->streamIndex)
             {
                 count++;
-                LOGE("解码第 %d 帧", count);
+                if(LOG_SHOW)
+                {
+                    LOGE("解码第 %d 帧", count);
+                }
                 wlAudio->queue->putAvpacket(packet);
             }else if(wlVideo != NULL && packet->stream_index == wlVideo->streamIndex)
             {
@@ -325,18 +361,19 @@ int WlFFmpeg::start() {
     }
     if(!exitByUser && wlJavaCall != NULL)
     {
-        LOGE("complete...");
         wlJavaCall->onComplete(WL_THREAD_CHILD);
     }
     exit = true;
-    LOGE("释放了");
     return 0;
 }
 
 void WlFFmpeg::release() {
     wlPlayStatus->exit = true;
     pthread_mutex_lock(&init_mutex);
-    LOGE("开始释放 wlffmpeg");
+    if(LOG_SHOW)
+    {
+        LOGE("开始释放 wlffmpeg");
+    }
     int sleepCount = 0;
     while(!exit)
     {
@@ -344,34 +381,62 @@ void WlFFmpeg::release() {
         {
             exit = true;
         }
-        LOGE("wait ffmpeg  exit %d", sleepCount);
+        if(LOG_SHOW)
+        {
+            LOGE("wait ffmpeg  exit %d", sleepCount);
+        }
+
         sleepCount++;
         av_usleep(1000 * 10);//暂停10毫秒
     }
-    LOGE("释放audio....................................");
+    if(LOG_SHOW)
+    {
+        LOGE("释放audio....................................");
+    }
+
     if(wlAudio != NULL)
     {
-        LOGE("释放audio....................................2");
+        if(LOG_SHOW)
+        {
+            LOGE("释放audio....................................2");
+        }
+
         wlAudio->realease();
         delete(wlAudio);
         wlAudio = NULL;
     }
-    LOGE("释放video....................................");
+    if(LOG_SHOW)
+    {
+        LOGE("释放video....................................");
+    }
+
     if(wlVideo != NULL)
     {
-        LOGE("释放video....................................2");
+        if(LOG_SHOW)
+        {
+            LOGE("释放video....................................2");
+        }
+
         wlVideo->release();
         delete(wlVideo);
         wlVideo = NULL;
     }
-    LOGE("释放format...................................");
+    if(LOG_SHOW)
+    {
+        LOGE("释放format...................................");
+    }
+
     if(pFormatCtx != NULL)
     {
         avformat_close_input(&pFormatCtx);
         avformat_free_context(pFormatCtx);
         pFormatCtx = NULL;
     }
-    LOGE("释放javacall.................................");
+    if(LOG_SHOW)
+    {
+        LOGE("释放javacall.................................");
+    }
+
     if(wlJavaCall != NULL)
     {
         wlJavaCall = NULL;

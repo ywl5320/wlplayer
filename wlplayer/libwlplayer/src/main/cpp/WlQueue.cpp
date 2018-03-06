@@ -19,15 +19,27 @@ WlQueue::~WlQueue() {
     pthread_cond_destroy(&condPacket);
     pthread_mutex_destroy(&mutexFrame);
     pthread_cond_destroy(&condFrame);
-    LOGE("~WlQueue() 释放完了");
+    if(LOG_SHOW)
+    {
+        LOGE("~WlQueue() 释放完了");
+    }
+
 }
 
 void WlQueue::release() {
-    LOGE("WlQueue::release");
+    if(LOG_SHOW)
+    {
+        LOGE("WlQueue::release");
+    }
+
     noticeThread();
     clearAvpacket();
     clearAvFrame();
-    LOGE("WlQueue::release success");
+    if(LOG_SHOW)
+    {
+        LOGE("WlQueue::release success");
+    }
+
 }
 
 int WlQueue::putAvpacket(AVPacket *avPacket) {
@@ -58,7 +70,6 @@ int WlQueue::getAvpacket(AVPacket *avPacket) {
             pkt = NULL;
             break;
         } else{
-            LOGD("wait ...");
             if(!wlPlayStatus->exit)
             {
                 pthread_cond_wait(&condPacket, &mutexPacket);

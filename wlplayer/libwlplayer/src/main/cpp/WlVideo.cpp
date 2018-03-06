@@ -14,7 +14,11 @@ WlVideo::WlVideo(WlJavaCall *javaCall, WlAudio *audio, WlPlayStatus *playStatus)
 }
 
 void WlVideo::release() {
-    LOGE("开始释放audio ...");
+    if(LOG_SHOW)
+    {
+        LOGE("开始释放audio ...");
+    }
+
     if(wlPlayStatus != NULL)
     {
         wlPlayStatus->exit = true;
@@ -26,7 +30,11 @@ void WlVideo::release() {
     int count = 0;
     while(!isExit || !isExit2)
     {
-        LOGE("等待渲染线程结束...%d", count);
+        if(LOG_SHOW)
+        {
+            LOGE("等待渲染线程结束...%d", count);
+        }
+
         if(count > 1000)
         {
             isExit = true;
@@ -113,7 +121,6 @@ void *codecFrame(void *data)
 
         int ret = avcodec_send_packet(wlVideo->avCodecContext, packet);
         if (ret < 0 && ret != AVERROR(EAGAIN) && ret != AVERROR_EOF) {
-            LOGD("worng");
             av_packet_free(&packet);
             av_free(packet);
             packet = NULL;
@@ -122,7 +129,6 @@ void *codecFrame(void *data)
         AVFrame *frame = av_frame_alloc();
         ret = avcodec_receive_frame(wlVideo->avCodecContext, frame);
         if (ret < 0 && ret != AVERROR_EOF) {
-            LOGD("wrong2");
             av_frame_free(&frame);
             av_free(frame);
             frame = NULL;
@@ -142,7 +148,6 @@ void *codecFrame(void *data)
 
 
 void WlVideo::playVideo(int type) {
-    LOGE("playVideo");
     codecType = type;
     if(codecType == 0)
     {
@@ -194,8 +199,12 @@ void WlVideo::decodVideo() {
             }
             double time = packet->pts * av_q2d(time_base);
 
-            LOGE("video clock is %f", time);
-            LOGE("audio clock is %f", wlAudio->clock);
+            if(LOG_SHOW)
+            {
+                LOGE("video clock is %f", time);
+                LOGE("audio clock is %f", wlAudio->clock);
+            }
+
             if(time < clock)
             {
                 time = clock;
@@ -215,7 +224,11 @@ void WlVideo::decodVideo() {
                 continue;
             }
             delayTime = getDelayTime(diff);
-            LOGE("delay time %f diff is %f", delayTime, diff);
+            if(LOG_SHOW)
+            {
+                LOGE("delay time %f diff is %f", delayTime, diff);
+            }
+
             av_usleep(delayTime * 1000);
             wljavaCall->onVideoInfo(WL_THREAD_CHILD, clock, duration);
             wljavaCall->onDecMediacodec(WL_THREAD_CHILD, packet->size, packet->data, clock);
@@ -259,16 +272,18 @@ void WlVideo::decodVideo() {
             av_frame_free(&frame);
             av_free(frame);
             frame = NULL;
-            LOGD("decode end...2");
         }
     }
     isExit = true;
-    LOGD("decode exit");
 
 }
 
 WlVideo::~WlVideo() {
-    LOGE("video s释放完");
+    if(LOG_SHOW)
+    {
+        LOGE("video s释放完");
+    }
+
 }
 
 double WlVideo::synchronize(AVFrame *srcFrame, double pts) {
@@ -289,7 +304,11 @@ double WlVideo::synchronize(AVFrame *srcFrame, double pts) {
 
 double WlVideo::getDelayTime(double diff) {
 
-    LOGD("audio video diff is %f", diff);
+    if(LOG_SHOW)
+    {
+        LOGD("audio video diff is %f", diff);
+    }
+
     if(diff > 0.003)
     {
         delayTime = delayTime / 3 * 2;

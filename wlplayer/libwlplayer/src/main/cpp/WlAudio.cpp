@@ -14,11 +14,18 @@ WlAudio::WlAudio(WlPlayStatus *playStatus, WlJavaCall *javaCall) {
 }
 
 WlAudio::~WlAudio() {
-    LOGE("~WlAudio() 释放完了");
+    if(LOG_SHOW)
+    {
+        LOGE("~WlAudio() 释放完了");
+    }
+
 }
 
 void WlAudio::realease() {
-    LOGE("开始释放 audio...");
+    if(LOG_SHOW)
+    {
+        LOGE("开始释放 audio...");
+    }
     pause();
     if(queue != NULL)
     {
@@ -27,7 +34,10 @@ void WlAudio::realease() {
     int count = 0;
     while(!isExit)
     {
-        LOGE("等待缓冲线程结束...%d", count);
+        if(LOG_SHOW)
+        {
+            LOGE("等待缓冲线程结束...%d", count);
+        }
         if(count > 1000)
         {
             isExit = true;
@@ -41,7 +51,10 @@ void WlAudio::realease() {
         delete(queue);
         queue = NULL;
     }
-    LOGE("释放 opensl es start");
+    if(LOG_SHOW)
+    {
+        LOGE("释放 opensl es start");
+    }
     if (pcmPlayerObject != NULL) {
         (*pcmPlayerObject)->Destroy(pcmPlayerObject);
         pcmPlayerObject = NULL;
@@ -51,7 +64,10 @@ void WlAudio::realease() {
         buffer = NULL;
         pcmsize = 0;
     }
-    LOGE("释放 opensl es end 1");
+    if(LOG_SHOW)
+    {
+        LOGE("释放 opensl es end 1");
+    }
     // destroy output mix object, and invalidate all associated interfaces
     if (outputMixObject != NULL) {
         (*outputMixObject)->Destroy(outputMixObject);
@@ -59,14 +75,21 @@ void WlAudio::realease() {
         outputMixEnvironmentalReverb = NULL;
     }
 
-    LOGE("释放 opensl es end 2");
+    if(LOG_SHOW)
+    {
+        LOGE("释放 opensl es end 2");
+    }
+
     // destroy engine object, and invalidate all associated interfaces
     if (engineObject != NULL) {
         (*engineObject)->Destroy(engineObject);
         engineObject = NULL;
         engineEngine = NULL;
     }
-    LOGE("释放 opensl es end");
+    if(LOG_SHOW)
+    {
+        LOGE("释放 opensl es end");
+    }
 
 
     if(out_buffer != NULL)
@@ -228,7 +251,10 @@ void pcmBufferCallBack(SLAndroidSimpleBufferQueueItf bf, void * context)
 {
     WlAudio *wlAudio = (WlAudio *) context;
     if(wlAudio != NULL) {
-        LOGE("pcm call back...");
+        if(LOG_SHOW)
+        {
+            LOGE("pcm call back...");
+        }
         wlAudio->buffer = NULL;
         wlAudio->pcmsize = wlAudio->getPcmData(&wlAudio->buffer);
         if (wlAudio->buffer && wlAudio->pcmsize > 0) {
@@ -241,7 +267,10 @@ void pcmBufferCallBack(SLAndroidSimpleBufferQueueItf bf, void * context)
 }
 
 int WlAudio::initOpenSL() {
-    LOGD("initopensl");
+    if(LOG_SHOW)
+    {
+        LOGD("initopensl");
+    }
     SLresult result;
     result = slCreateEngine(&engineObject, 0, 0, 0, 0, 0);
     result = (*engineObject)->Realize(engineObject, SL_BOOLEAN_FALSE);
@@ -299,7 +328,10 @@ int WlAudio::initOpenSL() {
 //    获取播放状态接口
     (*pcmPlayerPlay)->SetPlayState(pcmPlayerPlay, SL_PLAYSTATE_PLAYING);
     pcmBufferCallBack(pcmBufferQueue, this);
-    LOGE("initopensl 2");
+    if(LOG_SHOW)
+    {
+        LOGE("initopensl 2");
+    }
     return 0;
 }
 
