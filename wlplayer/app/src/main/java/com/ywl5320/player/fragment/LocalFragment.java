@@ -117,7 +117,7 @@ public class LocalFragment extends BaseFragment{
     {
         datas.clear();
         paths.clear();
-        File file = Environment.getExternalStorageDirectory().getParentFile().getParentFile();
+        File file = Environment.getExternalStorageDirectory().getAbsoluteFile();
         paths.add(file.getAbsolutePath());
         File[] files = file.listFiles();
         for(int i = 0; i < files.length; i++)
@@ -128,6 +128,7 @@ public class LocalFragment extends BaseFragment{
                 videoListBean.setParent(file.getAbsolutePath());
                 videoListBean.setName(files[i].getName());
                 videoListBean.setPath(files[i].getAbsolutePath());
+                videoListBean.setFile(files[i].isFile());
                 datas.add(videoListBean);
             }
         }
