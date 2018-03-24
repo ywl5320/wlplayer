@@ -219,13 +219,13 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
-            if(diff >= 0.8)
+            if(diff >= 0.5)
             {
                 av_free(packet->data);
                 av_free(packet->buf);
                 av_free(packet->side_data);
                 packet = NULL;
-                queue->clearAvpacket();
+                queue->clearToKeyFrame();
                 continue;
             }
             delayTime = getDelayTime(diff);
@@ -236,7 +236,7 @@ void WlVideo::decodVideo() {
 
             av_usleep(delayTime * 1000);
             wljavaCall->onVideoInfo(WL_THREAD_CHILD, clock, duration);
-            wljavaCall->onDecMediacodec(WL_THREAD_CHILD, packet->size, packet->data, clock);
+            wljavaCall->onDecMediacodec(WL_THREAD_CHILD, packet->size, packet->data, 0);
             av_free(packet->data);
             av_free(packet->buf);
             av_free(packet->side_data);
@@ -273,7 +273,7 @@ void WlVideo::decodVideo() {
                 av_frame_free(&frame);
                 av_free(frame);
                 frame = NULL;
-                queue->clearAvpacket();
+                queue->clearToKeyFrame();
                 continue;
             }
             av_usleep(delayTime * 1000);
