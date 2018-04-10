@@ -14,8 +14,10 @@
 ### 6、直接用mediacodec解码avpacket数据。
 ### 7、重点是可以学到很多东西：java与C++的相互调用、多线程的使用、opengl、opensl的使用等等。
 ### 8、附带一个播放视频和广播的demo。
-## <font color=#ff0000 size=7 face="黑体">~~如果帮到了您，您可以选择打赏一下哦~亲</font>
+---
+## ~~如果帮到了您，您可以选择打赏一下哦~亲
 <img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_ali.png"/>&nbsp;&nbsp;<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_wx.png"/>
+---
 # 以下是实例图片、API和接入流程
 ## APP Demo（注：视频数据来自于熊猫TV，广播数据来自于中国广播网）
 ### [App Demo 下载地址](https://pan.baidu.com/s/1cfjQAM)
