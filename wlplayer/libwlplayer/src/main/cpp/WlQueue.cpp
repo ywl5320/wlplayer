@@ -169,3 +169,24 @@ int WlQueue::noticeThread() {
     return 0;
 }
 
+int WlQueue::clearToKeyFrame() {
+    pthread_cond_signal(&condPacket);
+    pthread_mutex_lock(&mutexPacket);
+    while (!queuePacket.empty())
+    {
+        AVPacket *pkt = queuePacket.front();
+        if(pkt->flags != AV_PKT_FLAG_KEY)
+        {
+            queuePacket.pop();
+            av_free(pkt->data);
+            av_free(pkt->buf);
+            av_free(pkt->side_data);
+            pkt = NULL;
+        } else{
+            break;
+        }
+    }
+    pthread_mutex_unlock(&mutexPacket);
+    return 0;
+}
+

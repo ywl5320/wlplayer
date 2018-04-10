@@ -31,6 +31,7 @@ public:
     int putAvpacket(AVPacket *avPacket);
     int getAvpacket(AVPacket *avPacket);
     int clearAvpacket();
+    int clearToKeyFrame();
 
     int putAvframe(AVFrame *avFrame);
     int getAvframe(AVFrame *avFrame);
