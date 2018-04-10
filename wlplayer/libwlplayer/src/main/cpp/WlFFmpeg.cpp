@@ -296,16 +296,19 @@ int WlFFmpeg::start() {
         exit = false;
         if(wlPlayStatus->pause)//暂停
         {
+            av_usleep(1000 * 100);
             continue;
         }
         if(wlAudio != NULL && wlAudio->queue->getAvPacketSize() > 100)
         {
 //            LOGE("wlAudio 等待..........");
+            av_usleep(1000 * 100);
             continue;
         }
         if(wlVideo != NULL && wlVideo->queue->getAvPacketSize() > 100)
         {
 //            LOGE("wlVideo 等待..........");
+            av_usleep(1000 * 100);
             continue;
         }
         AVPacket *packet = av_packet_alloc();
@@ -523,6 +526,8 @@ int WlFFmpeg::seek(int64_t sec) {
 //            av_seek_frame(pFormatCtx, wlVideo->streamIndex, sec * wlVideo->time_base.den, AVSEEK_FLAG_FRAME | AVSEEK_FLAG_BACKWARD);
             wlVideo->setClock(0);
         }
+        wlAudio->clock = 0;
+        wlAudio->now_time = 0;
         pthread_mutex_unlock(&seek_mutex);
         wlPlayStatus->seek = false;
     }
@@ -551,9 +556,16 @@ void WlFFmpeg::setAudioChannel(int index) {
 void WlFFmpeg::setVideoChannel(int id) {
     if(wlVideo != NULL)
     {
-        wlVideo->streamIndex = videochannels.at(0)->channelId;
-        wlVideo->time_base = videochannels.at(0)->time_base;
-        wlVideo->rate = videochannels.at(0)->fps;
+        wlVideo->streamIndex = videochannels.at(id)->channelId;
+        wlVideo->time_base = videochannels.at(id)->time_base;
+        wlVideo->rate = 1000 / videochannels.at(id)->fps;
+        if(videochannels.at(id)->fps >= 60)
+        {
+            wlVideo->frameratebig = true;
+        } else{
+            wlVideo->frameratebig = false;
+        }
+
     }
 }
 

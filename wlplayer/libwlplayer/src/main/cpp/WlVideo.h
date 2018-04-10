@@ -34,6 +34,8 @@ public:
     int codecType = -1;
     double video_clock = 0;
     double framePts = 0;
+    bool frameratebig = false;
+    int playcount = -1;
 
 public:
     WlVideo(WlJavaCall *javaCall, WlAudio *audio, WlPlayStatus *playStatus);

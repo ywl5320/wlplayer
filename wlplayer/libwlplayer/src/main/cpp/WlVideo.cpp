@@ -219,15 +219,32 @@ void WlVideo::decodVideo() {
             {
                 diff = wlAudio->clock - clock;
             }
+            playcount++;
+            if(playcount > 500)
+            {
+                playcount = 0;
+            }
             if(diff >= 0.5)
             {
-                av_free(packet->data);
-                av_free(packet->buf);
-                av_free(packet->side_data);
-                packet = NULL;
-                queue->clearToKeyFrame();
-                continue;
+                if(frameratebig)
+                {
+                    if(playcount % 3 == 0 && packet->flags != AV_PKT_FLAG_KEY)
+                    {
+                        av_free(packet->data);
+                        av_free(packet->buf);
+                        av_free(packet->side_data);
+                        packet = NULL;
+                        continue;
+                    }
+                } else{
+                    av_free(packet->data);
+                    av_free(packet->buf);
+                    av_free(packet->side_data);
+                    packet = NULL;
+                    continue;
+                }
             }
+
             delayTime = getDelayTime(diff);
             if(LOG_SHOW)
             {
@@ -268,14 +285,40 @@ void WlVideo::decodVideo() {
             {
                 LOGE("delay time %f diff is %f", delayTime, diff);
             }
-            if(diff >= 0.8)
+//            if(diff >= 0.8)
+//            {
+//                av_frame_free(&frame);
+//                av_free(frame);
+//                frame = NULL;
+//                continue;
+//            }
+
+            playcount++;
+            if(playcount > 500)
             {
-                av_frame_free(&frame);
-                av_free(frame);
-                frame = NULL;
-                queue->clearToKeyFrame();
-                continue;
+                playcount = 0;
             }
+            if(diff >= 0.5)
+            {
+                if(frameratebig)
+                {
+                    if(playcount % 3 == 0)
+                    {
+                        av_frame_free(&frame);
+                        av_free(frame);
+                        frame = NULL;
+                        queue->clearToKeyFrame();
+                        continue;
+                    }
+                } else{
+                    av_frame_free(&frame);
+                    av_free(frame);
+                    frame = NULL;
+                    queue->clearToKeyFrame();
+                    continue;
+                }
+            }
+
             av_usleep(delayTime * 1000);
             wljavaCall->onVideoInfo(WL_THREAD_CHILD, clock, duration);
             wljavaCall->onGlRenderYuv(WL_THREAD_CHILD, frame->linesize[0], frame->height, frame->data[0], frame->data[1], frame->data[2]);

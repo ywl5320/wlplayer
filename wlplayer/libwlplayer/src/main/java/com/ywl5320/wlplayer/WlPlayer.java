@@ -433,7 +433,7 @@ public class WlPlayer {
         {
             try
             {
-                int inputBufferIndex = mediaCodec.dequeueInputBuffer(10000);
+                int inputBufferIndex = mediaCodec.dequeueInputBuffer(10);
                 if(inputBufferIndex >= 0)
                 {
                     ByteBuffer byteBuffer = mediaCodec.getInputBuffers()[inputBufferIndex];
@@ -441,12 +441,10 @@ public class WlPlayer {
                     byteBuffer.put(bytes);
                     mediaCodec.queueInputBuffer(inputBufferIndex, 0, size, pts, 0);
                 }
-                int index = mediaCodec.dequeueOutputBuffer(info, 10000);
-                if (index >= 0) {
-                    ByteBuffer buffer = mediaCodec.getOutputBuffers()[index];
-                    buffer.position(info.offset);
-                    buffer.limit(info.offset + info.size);
+                int index = mediaCodec.dequeueOutputBuffer(info, 10);
+                while (index >= 0) {
                     mediaCodec.releaseOutputBuffer(index, true);
+                    index = mediaCodec.dequeueOutputBuffer(info, 10);
                 }
             }catch (Exception e)
             {

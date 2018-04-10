@@ -132,6 +132,7 @@ int WlAudio::getPcmData(void **pcm) {
 
         if(wlPlayStatus->pause)//暂停
         {
+            av_usleep(1000 * 100);
             continue;
         }
         if(wlPlayStatus->seek)
@@ -389,6 +390,7 @@ void WlAudio::setVideo(bool video) {
 }
 
 void WlAudio::setClock(int secds) {
+    now_time = secds;
     clock = secds;
 }
 
