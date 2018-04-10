@@ -4,7 +4,6 @@
 ### *.修复seek后导致音视频不同步问题
 ### *.视频解码慢时，进行丢帧处理
 
-## [我的视频课程：《FFmpeg打造Android万能音频播放器》](https://edu.csdn.net/course/detail/6842)
 
 ### Android 基于：FFmpeg+OpenSL+OpenGL+Mediacodec 的视频播放SDK，可播放网络、本地和广播等流媒。
 ### 1、支持当前播放页直接切换播放源。
@@ -15,6 +14,10 @@
 ### 6、直接用mediacodec解码avpacket数据。
 ### 7、重点是可以学到很多东西：java与C++的相互调用、多线程的使用、opengl、opensl的使用等等。
 ### 8、附带一个播放视频和广播的demo。
+---
+## ~~如果帮到了您，您可以选择打赏一下哦~亲
+<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_ali.png"/>&nbsp;&nbsp;<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_wx.png"/>
+---
 # 以下是实例图片、API和接入流程
 ## APP Demo（注：视频数据来自于熊猫TV，广播数据来自于中国广播网）
 ### [App Demo 下载地址](https://pan.baidu.com/s/1cfjQAM)
@@ -201,8 +204,7 @@
         });
         
 
-## 如果帮到了您，您可以选择打赏一下哦~
-<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_ali.png"/>&nbsp;&nbsp;<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_wx.png"/>&nbsp;&nbsp;<img float:left width="250" height="375" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_red.png"/>
+
 
 
 ## TODO
