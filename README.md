@@ -4,6 +4,8 @@
 ### *.修复seek后导致音视频不同步问题
 ### *.视频解码慢时，进行丢帧处理
 
+## [我的视频课程：《FFmpeg打造Android万能音频播放器》](https://edu.csdn.net/course/detail/6842)
+
 
 ### Android 基于：FFmpeg+OpenSL+OpenGL+Mediacodec 的视频播放SDK，可播放网络、本地和广播等流媒。
 ### 1、支持当前播放页直接切换播放源。
