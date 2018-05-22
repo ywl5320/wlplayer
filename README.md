@@ -1,28 +1,29 @@
 # wlplayer v1.0.1
 ## Update
-### *.Ìí¼Ó x86 cpu¼Ü¹¹
-### *.ĞŞ¸´seekºóµ¼ÖÂÒôÊÓÆµ²»Í¬²½ÎÊÌâ
-### *.ÊÓÆµ½âÂëÂıÊ±£¬½øĞĞ¶ªÖ¡´¦Àí
+### *.æ·»åŠ  x86 cpuæ¶æ„
+### *.ä¿®å¤seekåå¯¼è‡´éŸ³è§†é¢‘ä¸åŒæ­¥é—®é¢˜
+### *.è§†é¢‘è§£ç æ…¢æ—¶ï¼Œè¿›è¡Œä¸¢å¸§å¤„ç†
 
-## [ÎÒµÄÊÓÆµ¿Î³Ì£º¡¶FFmpeg´òÔìAndroidÍòÄÜÒôÆµ²¥·ÅÆ÷¡·](https://edu.csdn.net/course/detail/6842)
+## [æˆ‘çš„è§†é¢‘è¯¾ç¨‹ï¼ˆåŸºç¡€ï¼‰ï¼šã€Šï¼ˆNDKï¼‰FFmpegæ‰“é€ Androidä¸‡èƒ½éŸ³é¢‘æ’­æ”¾å™¨ã€‹](https://edu.csdn.net/course/detail/6842)
+## [æˆ‘çš„è§†é¢‘è¯¾ç¨‹ï¼ˆè¿›é˜¶ï¼‰ï¼šã€Šï¼ˆNDKï¼‰FFmpegæ‰“é€ Androidè§†é¢‘æ’­æ”¾å™¨ã€‹](https://edu.csdn.net/course/detail/8036)
 
 
-### Android »ùÓÚ£ºFFmpeg+OpenSL+OpenGL+Mediacodec µÄÊÓÆµ²¥·ÅSDK£¬¿É²¥·ÅÍøÂç¡¢±¾µØºÍ¹ã²¥µÈÁ÷Ã½¡£
-### 1¡¢Ö§³Öµ±Ç°²¥·ÅÒ³Ö±½ÓÇĞ»»²¥·ÅÔ´¡£
-### 2¡¢Ö§³ÖÊÓÆµÊµÊ±½ØÍ¼¡£
-### 3¡¢ÓÅÏÈÑ¡ÓÃGPU½âÂë£¬½âÂëËÙ¶È¸ü¿ì¡£
-### 4¡¢ÔÚÊÖ»úÖ§³Ö1080P¡¢2K¡¢4KµÈµÄÇé¿öÏÂ¶¼¿É²¥·Å¡£
-### 5¡¢·â×°³£ÓÃ²¥·Å×´Ì¬»Øµ÷£¬½ÓÈë¼òµ¥¡£
-### 6¡¢Ö±½ÓÓÃmediacodec½âÂëavpacketÊı¾İ¡£
-### 7¡¢ÖØµãÊÇ¿ÉÒÔÑ§µ½ºÜ¶à¶«Î÷£ºjavaÓëC++µÄÏà»¥µ÷ÓÃ¡¢¶àÏß³ÌµÄÊ¹ÓÃ¡¢opengl¡¢openslµÄÊ¹ÓÃµÈµÈ¡£
-### 8¡¢¸½´øÒ»¸ö²¥·ÅÊÓÆµºÍ¹ã²¥µÄdemo¡£
+### Android åŸºäºï¼šFFmpeg+OpenSL+OpenGL+Mediacodec çš„è§†é¢‘æ’­æ”¾SDKï¼Œå¯æ’­æ”¾ç½‘ç»œã€æœ¬åœ°å’Œå¹¿æ’­ç­‰æµåª’ã€‚
+### 1ã€æ”¯æŒå½“å‰æ’­æ”¾é¡µç›´æ¥åˆ‡æ¢æ’­æ”¾æºã€‚
+### 2ã€æ”¯æŒè§†é¢‘å®æ—¶æˆªå›¾ã€‚
+### 3ã€ä¼˜å…ˆé€‰ç”¨GPUè§£ç ï¼Œè§£ç é€Ÿåº¦æ›´å¿«ã€‚
+### 4ã€åœ¨æ‰‹æœºæ”¯æŒ1080Pã€2Kã€4Kç­‰çš„æƒ…å†µä¸‹éƒ½å¯æ’­æ”¾ã€‚
+### 5ã€å°è£…å¸¸ç”¨æ’­æ”¾çŠ¶æ€å›è°ƒï¼Œæ¥å…¥ç®€å•ã€‚
+### 6ã€ç›´æ¥ç”¨mediacodecè§£ç avpacketæ•°æ®ã€‚
+### 7ã€é‡ç‚¹æ˜¯å¯ä»¥å­¦åˆ°å¾ˆå¤šä¸œè¥¿ï¼šjavaä¸C++çš„ç›¸äº’è°ƒç”¨ã€å¤šçº¿ç¨‹çš„ä½¿ç”¨ã€openglã€openslçš„ä½¿ç”¨ç­‰ç­‰ã€‚
+### 8ã€é™„å¸¦ä¸€ä¸ªæ’­æ”¾è§†é¢‘å’Œå¹¿æ’­çš„demoã€‚
 ---
-## ~~Èç¹û°ïµ½ÁËÄú£¬Äú¿ÉÒÔÑ¡Ôñ´òÉÍÒ»ÏÂÅ¶~Ç×
+## ~~å¦‚æœå¸®åˆ°äº†æ‚¨ï¼Œæ‚¨å¯ä»¥é€‰æ‹©æ‰“èµä¸€ä¸‹å“¦~äº²
 <img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_ali.png"/>&nbsp;&nbsp;<img float:left width="250" height="298" src="https://github.com/wanliyang1990/wlplayer/blob/master/imgs/zan_wx.png"/>
 ---
-# ÒÔÏÂÊÇÊµÀıÍ¼Æ¬¡¢APIºÍ½ÓÈëÁ÷³Ì
-## APP Demo£¨×¢£ºÊÓÆµÊı¾İÀ´×ÔÓÚĞÜÃ¨TV£¬¹ã²¥Êı¾İÀ´×ÔÓÚÖĞ¹ú¹ã²¥Íø£©
-### [App Demo ÏÂÔØµØÖ·](https://pan.baidu.com/s/1cfjQAM)
+# ä»¥ä¸‹æ˜¯å®ä¾‹å›¾ç‰‡ã€APIå’Œæ¥å…¥æµç¨‹
+## APP Demoï¼ˆæ³¨ï¼šè§†é¢‘æ•°æ®æ¥è‡ªäºç†ŠçŒ«TVï¼Œå¹¿æ’­æ•°æ®æ¥è‡ªäºä¸­å›½å¹¿æ’­ç½‘ï¼‰
+### [App Demo ä¸‹è½½åœ°å€](https://pan.baidu.com/s/1cfjQAM)
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/1.png)
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/2.png)</br>
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/3.png)
@@ -31,82 +32,82 @@
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/6.png)</br>
 ![image](https://github.com/wanliyang1990/wlplayer/blob/master/imgs/7.png)</br>
 
-## Ò»¡¢API v1.0.1
+## ä¸€ã€API v1.0.1
 
-#### 1¡¢»Øµ÷½Ó¿Ú
-    //×¼±¸ºÃ²¥·Åºó»Øµ÷´Ë½Ó¿Ú
+#### 1ã€å›è°ƒæ¥å£
+    //å‡†å¤‡å¥½æ’­æ”¾åå›è°ƒæ­¤æ¥å£
     WlOnPreparedListener
     
-    //ÊÓÆµ¼ÓÔØ»Øµ÷´Ë½Ó¿Ú
+    //è§†é¢‘åŠ è½½å›è°ƒæ­¤æ¥å£
     WlOnLoadListener
     
-    //ÊÓÆµÊ±³¤ºÍµ±Ç°²¥·ÅÊ±³¤»Øµ÷´Ë½Ó¿Ú
+    //è§†é¢‘æ—¶é•¿å’Œå½“å‰æ’­æ”¾æ—¶é•¿å›è°ƒæ­¤æ¥å£
     WlOnInfoListener
     
-    //ÊÓÆµ³ö´í»Øµ÷´Ë½Ó¿Ú
+    //è§†é¢‘å‡ºé”™å›è°ƒæ­¤æ¥å£
     WlOnErrorListener
     
-    //ÊÓÆµ²¥·Å½áÊø»Øµ÷´Ë½Ó¿Ú
+    //è§†é¢‘æ’­æ”¾ç»“æŸå›è°ƒæ­¤æ¥å£
     WlOnCompleteListener
     
-    //ÊÓÆµ½ØÆÁ»Øµ÷´Ë½Ó¿Ú
+    //è§†é¢‘æˆªå±å›è°ƒæ­¤æ¥å£
     WlOnCutVideoImgListener
     
-    //²¥·ÅÒ³ÇĞ»»²¥·ÅÔ´Ê±»Øµ÷´Ë½Ó¿Ú£¨stop(false)Ê±£©£¬ÔÚ´Ë½Ó¿Ú¿ÉÖØĞÂÉèÖÃĞÂµÄ²¥·ÅÔ´
+    //æ’­æ”¾é¡µåˆ‡æ¢æ’­æ”¾æºæ—¶å›è°ƒæ­¤æ¥å£ï¼ˆstop(false)æ—¶ï¼‰ï¼Œåœ¨æ­¤æ¥å£å¯é‡æ–°è®¾ç½®æ–°çš„æ’­æ”¾æº
     WlOnStopListener
 
-#### 2¡¢·½·¨
-    //ÉèÖÃ²¥·ÅÔ´
+#### 2ã€æ–¹æ³•
+    //è®¾ç½®æ’­æ”¾æº
     void setDataSource(String dataSource);
     
-    //ÉèÖÃÊÇ·ñ²¥·ÅÒôÆµ£¨¹ã²¥£©
+    //è®¾ç½®æ˜¯å¦æ’­æ”¾éŸ³é¢‘ï¼ˆå¹¿æ’­ï¼‰
     void setOnlyMusic(boolean onlyMusic)
     
-    //ÉèÖÃÊÓÆµäÖÈ¾glsurfaceview
+    //è®¾ç½®è§†é¢‘æ¸²æŸ“glsurfaceview
     void setWlGlSurfaceView(WlGlSurfaceView wlGlSurfaceView)
     
-    //×¼±¸²¥·Å£¨¶ÔÓ¦»Øµ÷½Ó¿Ú£©
+    //å‡†å¤‡æ’­æ”¾ï¼ˆå¯¹åº”å›è°ƒæ¥å£ï¼‰
     void prepared()
     
-    //×¼±¸ºÃºó£¬¿ªÊ¼²¥·Å
+    //å‡†å¤‡å¥½åï¼Œå¼€å§‹æ’­æ”¾
     void start()
     
-    //ÔİÍ£
+    //æš‚åœ
     void pause()
     
-    //²¥·Å£¨Ïà¶ÔÓÚÔİÍ££©
+    //æ’­æ”¾ï¼ˆç›¸å¯¹äºæš‚åœï¼‰
     void resume()
     
-    //Í£Ö¹ true£º²»»Øµ÷Í£Ö¹½Ó¿Ú£¬false:»Øµ÷Í£Ö¹½Ó¿Ú
+    //åœæ­¢ trueï¼šä¸å›è°ƒåœæ­¢æ¥å£ï¼Œfalse:å›è°ƒåœæ­¢æ¥å£
     void stop(final boolean exit)
     
-    //seekµ½ÈÎÒâÊ±¼ä£¨²»ÊÇ¹Ø¼üÖ¡£¬¿ÉÄÜ»á³öÏÖ¼¸ÃëÖÓ»¨ÆÁ£©
+    //seekåˆ°ä»»æ„æ—¶é—´ï¼ˆä¸æ˜¯å…³é”®å¸§ï¼Œå¯èƒ½ä¼šå‡ºç°å‡ ç§’é’ŸèŠ±å±ï¼‰
     void seek(final int secds)
     
-    //µÃµ½×Ü²¥·ÅÊ±³¤
+    //å¾—åˆ°æ€»æ’­æ”¾æ—¶é•¿
     int getDuration()
      
-    //µÃµ½ÊÓÆµ¿í¶È
+    //å¾—åˆ°è§†é¢‘å®½åº¦
     int getVideoWidth()
     
-    //µÃµ½ÊÓÆµ¸ß¶È
+    //å¾—åˆ°è§†é¢‘é«˜åº¦
     int getVideoHeight()
     
-    //µÃµ½Òô¹ìÊı
+    //å¾—åˆ°éŸ³è½¨æ•°
     int getAudioChannels()
     
-    //ÉèÖÃÒôÆµÒô¹ì£¨¸ù¾İÒô¹ìÊıÁ¿ÉèÖÃË÷Òı£©
+    //è®¾ç½®éŸ³é¢‘éŸ³è½¨ï¼ˆæ ¹æ®éŸ³è½¨æ•°é‡è®¾ç½®ç´¢å¼•ï¼‰
     void setAudioChannels(int index)
     
 
-## ¶ş¡¢½ÓÈëÁ÷³Ì
-#### 1¡¢Ìí¼Ó²¼¾Ö
+## äºŒã€æ¥å…¥æµç¨‹
+#### 1ã€æ·»åŠ å¸ƒå±€
     <com.ywl5320.opengles.WlGlSurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
      
-#### 2¡¢´´½¨²¥·ÅÆ÷¶ÔÏó
+#### 2ã€åˆ›å»ºæ’­æ”¾å™¨å¯¹è±¡
 
 
     private WlGlSurfaceView surfaceview;
@@ -117,31 +118,31 @@
     public void onCreate(Bundle savedInstanceState) {
     
         wlPlayer = new WlPlayer();
-        wlPlayer.setOnlyMusic(false); // true:²¥·Å¹ã²¥£¬false:²¥·ÅÊÓÆµ
-        wlPlayer.setDataSource(pathurl); //ÉèÖÃ²¥·ÅÔ´
-        wlPlayer.setWlGlSurfaceView(surfaceview); //²¥·Å¹ã²¥¿É²»¼ÓÊÓÆµäÖÈ¾²¼¾Ö
+        wlPlayer.setOnlyMusic(false); // true:æ’­æ”¾å¹¿æ’­ï¼Œfalse:æ’­æ”¾è§†é¢‘
+        wlPlayer.setDataSource(pathurl); //è®¾ç½®æ’­æ”¾æº
+        wlPlayer.setWlGlSurfaceView(surfaceview); //æ’­æ”¾å¹¿æ’­å¯ä¸åŠ è§†é¢‘æ¸²æŸ“å¸ƒå±€
     
     }
 
-#### 3¡¢×¼±¸²¥·Å
+#### 3ã€å‡†å¤‡æ’­æ”¾
     wlPlayer.prepared();
     
-#### 4¡¢Ìí¼Ó»Øµ÷£¨×¢£º¶¼ÔÚ×ÓÏß³ÌÖĞ£©
+#### 4ã€æ·»åŠ å›è°ƒï¼ˆæ³¨ï¼šéƒ½åœ¨å­çº¿ç¨‹ä¸­ï¼‰
 
-    //ÊÓÆµ×¼±¸ºÃ²¥·ÅÊ±»Øµ÷
+    //è§†é¢‘å‡†å¤‡å¥½æ’­æ”¾æ—¶å›è°ƒ
     wlPlayer.setWlOnPreparedListener(new WlOnPreparedListener() {
             @Override
             public void onPrepared() {
         
-                wlPlayer.start();//¿ªÊ¼²¥·Å
+                wlPlayer.start();//å¼€å§‹æ’­æ”¾
                 
             }
         });
         
-    //¼ÓÔØ»Øµ÷
+    //åŠ è½½å›è°ƒ
     wlPlayer.setWlOnLoadListener(new WlOnLoadListener() {
             @Override
-            public void onLoad(boolean load) {//true:¼ÓÔØÖĞ false:¼ÓÔØÍê³É
+            public void onLoad(boolean load) {//true:åŠ è½½ä¸­ false:åŠ è½½å®Œæˆ
                 
                 Message message = Message.obtain();
                 message.what = 1;
@@ -150,10 +151,10 @@
             }
         });
         
-    //²¥·ÅÊ±¼äĞÅÏ¢»Øµ÷
+    //æ’­æ”¾æ—¶é—´ä¿¡æ¯å›è°ƒ
     wlPlayer.setWlOnInfoListener(new WlOnInfoListener() {
             @Override
-            public void onInfo(WlTimeBean wlTimeBean) {//µ±Ç°²¥·ÅÊ±¼äºÍ×ÜµÄÊ±¼ä
+            public void onInfo(WlTimeBean wlTimeBean) {//å½“å‰æ’­æ”¾æ—¶é—´å’Œæ€»çš„æ—¶é—´
             
                 Message message = Message.obtain();
                 message.what = 2;
@@ -163,7 +164,7 @@
             }
         });
         
-    //´íÎó»Øµ÷
+    //é”™è¯¯å›è°ƒ
     wlPlayer.setWlOnErrorListener(new WlOnErrorListener() {
             @Override
             public void onError(int code, String msg) {
@@ -175,7 +176,7 @@
             }
         });
         
-    //²¥·ÅÍê³É»Øµ÷
+    //æ’­æ”¾å®Œæˆå›è°ƒ
     wlPlayer.setWlOnCompleteListener(new WlOnCompleteListener() {
             @Override
             public void onComplete() {
@@ -184,7 +185,7 @@
             }
         });
         
-    //ÊÓÆµ½ØÆÁ»Øµ÷
+    //è§†é¢‘æˆªå±å›è°ƒ
     wlPlayer.setWlOnCutVideoImgListener(new WlOnCutVideoImgListener() {
             @Override
             public void onCutVideoImg(Bitmap bitmap) {
@@ -195,7 +196,7 @@
             }
         });
         
-    //Í£Ö¹²¥·Å»Øµ÷£¨ÔÚwlPlayer.stop(false)µÈÇé¿öÏÂ²Å»á»Øµ÷Õâ¸ö·½·¨£¬ÀïÃæ¿É´¦ÀíÇĞ»»²¥·ÅÔ´²Ù×÷£©
+    //åœæ­¢æ’­æ”¾å›è°ƒï¼ˆåœ¨wlPlayer.stop(false)ç­‰æƒ…å†µä¸‹æ‰ä¼šå›è°ƒè¿™ä¸ªæ–¹æ³•ï¼Œé‡Œé¢å¯å¤„ç†åˆ‡æ¢æ’­æ”¾æºæ“ä½œï¼‰
     wlPlayer.setWlOnStopListener(new WlOnStopListener() {
             @Override
             public void onStop() {
@@ -210,13 +211,13 @@
 
 
 ## TODO
-### ¼æÈİĞÔºÍĞÔÄÜÓÅ»¯
+### å…¼å®¹æ€§å’Œæ€§èƒ½ä¼˜åŒ–
 </br>
 
-## ×¢
-#### µ±Ç°»·¾³£ºFFmpeg-3.4, AS-3.0£¬ NDK-14b£¬Ğ¡Ã×ÊÖ»ú2A
-#### CPU£ºarm ºÍ x86
-#### 2018-01-01 happy new year£¡
+## æ³¨
+#### å½“å‰ç¯å¢ƒï¼šFFmpeg-3.4, AS-3.0ï¼Œ NDK-14bï¼Œå°ç±³æ‰‹æœº2A
+#### CPUï¼šarm å’Œ x86
+#### 2018-01-01 happy new yearï¼
 </br>
 
 ## Create by:ywl5320
