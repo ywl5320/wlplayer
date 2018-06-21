@@ -1,4 +1,4 @@
-# wlplayer v1.0.1
+# wlplayer v1.0.1（讨论群：806397913）
 
 ## [我的视频课程（基础）：《（NDK）FFmpeg打造Android万能音频播放器》](https://edu.csdn.net/course/detail/6842)
 ## [我的视频课程（进阶）：《（NDK）FFmpeg打造Android视频播放器》](https://edu.csdn.net/course/detail/8036)
