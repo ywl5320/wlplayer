@@ -5,6 +5,9 @@
 ## [我的视频课程（编码直播推流）：《Android视频编码和直播推流》](https://edu.csdn.net/course/detail/8942)
 ## 百度网盘链接: https://pan.baidu.com/s/1mvIflaxujEoufLrnyNNxRQ 提取码: mkki
 
+## 快速使用本库
+请移步：https://github.com/wanliyang1990/wlmedia
+
 ## Update
 ### *.添加 x86 cpu架构
 ### *.修复seek后导致音视频不同步问题
